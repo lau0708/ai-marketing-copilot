@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Outbound Studio · AI 出海营销助手</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="shell">
+  <header class="top">
+    <div class="logo">
+      <div>Outbound Studio<small>AI MARKETING COPILOT</small></div>
+    </div>
+    <div class="topright">
+      <span>工作空间 / 星瀚科技（虚构）</span>
+      <span class="status">● 演示环境 · 模拟数据</span>
+      <span class="status" id="aiModeBadge">AI：检测中…</span>
+      <select id="aiModeSelect" class="mode-select" title="切换 AI 生成模式">
+        <option value="auto">自动</option>
+        <option value="real">真实 AI</option>
+        <option value="mock">模拟模式</option>
+      </select>
+    </div>
+  </header>
+
+  <main>
+    <div class="heading">
+      <div>
+        <div class="eyebrow"><b>✳</b> INTELLIGENT OUTBOUND WORKFLOW</div>
+        <h1>让每一次出海获客，都有据可循。</h1>
+        <p>从目标定义、企业核验到营销交付与复盘，Agent 协助完成完整业务链路。</p>
+      </div>
+      <div class="case-pill">当前案例　星瀚科技（虚构） · 无线耳机 · 美国市场</div>
+    </div>
+
+    <nav class="nav" id="nav">
+      <button type="button" data-module="0"><span>01 / DISCOVER</span><strong>潜客分析</strong></button>
+      <button type="button" data-module="1"><span>02 / CONNECT</span><strong>客户联系</strong></button>
+      <button type="button" data-module="2"><span>03 / PROPOSE</span><strong>方案撰写</strong></button>
+      <button type="button" data-module="3"><span>04 / DELIVER</span><strong>执行交付</strong></button>
+      <button type="button" data-module="4"><span>05 / OPTIMIZE</span><strong>数据复盘</strong></button>
+    </nav>
+
+    <div id="workspace"></div>
+
+    <div class="foot">OUTBOUND STUDIO · AI 辅助决策，人类负责核验与审批 · 所有企业与营销数据均为虚构演示数据</div>
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/data.js"></script>
+<script src="js/agent.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

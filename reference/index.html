@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Outbound Studio · AI 出海营销助手</title>
+<style>
+:root{--ink:#17243a;--muted:#8391a8;--line:#e7ebf1;--paper:#fff;--canvas:#f7f8fa;--navy:#14243b;--red:#a34d52;--blue:#4669a8;--pale:#f1f5fa;--green:#397d68}
+*{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--ink);font:14px/1.55 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+.shell{max-width:1440px;margin:auto;min-height:100vh}.top{height:66px;border-bottom:1px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 34px;position:sticky;top:0;z-index:5}
+.logo{display:flex;align-items:center;gap:12px;font-family:Georgia,serif;font-size:20px;letter-spacing:.2px}.mark{width:29px;height:29px;border:1px solid #d9dfe8;border-radius:50%;display:grid;place-items:center;color:var(--red);font-size:17px}.logo small{display:block;font:9px/1.4 monospace;letter-spacing:2px;color:#9aa5b6}.topright{display:flex;align-items:center;gap:18px;color:var(--muted);font-size:12px}.status{border:1px solid var(--line);border-radius:20px;padding:6px 11px;background:#fafbfc}
+main{max-width:1190px;margin:30px auto;padding:0 22px}.heading{display:flex;justify-content:space-between;align-items:end;margin-bottom:20px}.eyebrow{font:10px monospace;letter-spacing:1.6px;color:#9aa6b8}.eyebrow b{color:var(--red);margin-right:10px}.heading h1{font:30px/1.25 Georgia,"Songti SC",serif;font-weight:400;margin:8px 0 5px}.heading p{margin:0;color:var(--muted);font-size:12px}.case-pill{font-size:11px;color:#62728a;border:1px solid var(--line);padding:8px 12px;border-radius:20px;background:#fff}
+.nav{display:flex;gap:7px;margin:0 0 17px;overflow:auto}.nav button{flex:1;min-width:125px;text-align:left;background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px 12px;color:var(--muted);cursor:pointer}.nav button.active{border-color:#aab8cc;background:#f2f5f9;color:var(--ink)}.nav strong{display:block;font-size:12px;font-weight:600;color:inherit}.nav span{font:9px monospace;letter-spacing:1px;opacity:.8}
+.grid{display:grid;grid-template-columns:1.12fr .88fr;gap:18px}.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:25px 27px;box-shadow:0 10px 35px rgba(27,42,67,.035)}.cardhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.section{font:10px monospace;letter-spacing:1.5px;color:#93a0b4}.section b{color:var(--red);margin-right:9px}.hint{font-size:10px;color:#a1adbd}
+h2{font:25px/1.3 Georgia,"Songti SC",serif;font-weight:400;margin:0 0 7px}.lead{font-size:12px;color:var(--muted);margin:0 0 20px}.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{margin-bottom:12px}.field.full{grid-column:1/-1}.field label{display:block;font-size:10px;color:#8491a5;margin-bottom:6px}.field input,.field textarea,.field select{width:100%;border:1px solid #e3e8ef;border-radius:8px;background:#fbfcfd;padding:10px 11px;color:#24334a;font:12px inherit;outline:none}.field textarea{min-height:65px;resize:vertical}.field input:focus,.field textarea:focus{border-color:#9eafc6}.btn{border:0;border-radius:8px;background:var(--navy);color:#fff;padding:11px 17px;font-size:11px;letter-spacing:.2px;cursor:pointer;box-shadow:0 5px 13px #17243a20}.btn.light{background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:none}.btnline{display:flex;gap:9px;align-items:center;margin-top:8px}.micro{font-size:10px;color:#a0acbd}
+.traceTop{display:flex;justify-content:space-between;align-items:center}.badge{font-size:10px;border-radius:18px;padding:5px 10px;background:#f1f3f6;color:#7e8ca1}.badge.done{background:#edf6f2;color:var(--green)}.meta{display:flex;gap:35px;border-bottom:1px solid var(--line);padding:17px 0 19px;margin-bottom:17px}.meta label{display:block;font:9px monospace;letter-spacing:1px;color:#a1adbd}.meta b{display:block;font:13px Georgia,serif;margin-top:5px}
+.trace{list-style:none;padding:0;margin:0}.trace li{display:flex;gap:12px;position:relative;padding:0 0 16px;min-height:48px}.trace li:not(:last-child):before{content:"";position:absolute;left:13px;top:29px;bottom:0;border-left:1px solid #e5eaf0}.num{width:27px;height:27px;border:1px solid #e3e8ef;border-radius:50%;display:grid;place-items:center;font:9px monospace;color:#98a6b8;background:#fff;z-index:1;flex-shrink:0}.trace li.finished .num{border-color:#b9d6ca;color:var(--green);background:#f4faf7}.trace li.current .num{border-color:#c58d90;color:var(--red)}.trace strong{display:block;font-size:11px;font-weight:600;color:#7e8da2}.trace li.current strong{color:var(--ink)}.trace small{font-size:10px;color:#a5b0bf}.trace li.finished small{color:var(--green)}
+.empty{margin-top:7px;border:1px dashed #e2e7ee;border-radius:10px;padding:15px;text-align:center;color:#a3afbf;font-size:10px}
+.wide{margin-top:18px}.sourceGrid{display:grid;grid-template-columns:1fr 1fr;gap:22px}.sourcebox{background:#f8fafc;border-radius:12px;padding:18px;min-height:180px}.sourcebox.center{display:grid;place-items:center;text-align:center;color:#9aa7b8}.sourcebox textarea{width:100%;height:85px;border:1px solid #e5eaf0;border-radius:8px;padding:10px;background:white;font:12px/1.6 inherit}.sourceRows{font-size:11px}.sourceRows div{padding:9px 0;border-bottom:1px solid #e9edf2;display:flex;justify-content:space-between;gap:12px}.ok{color:var(--green)}
+.output{border:1px solid #e7ebf1;border-radius:10px;padding:15px;background:#fbfcfe;font-size:12px;line-height:1.8;white-space:pre-wrap}.output b{color:#283c59}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.metric{background:#f7f9fb;border-radius:9px;padding:12px}.metric b{font:23px Georgia,serif;display:block}.metric span{font-size:10px;color:var(--muted)}.table{width:100%;border-collapse:collapse;font-size:11px}.table th,.table td{text-align:left;padding:10px 7px;border-bottom:1px solid var(--line)}.table th{font-size:10px;color:#96a2b3;font-weight:500}.tag{border-radius:20px;background:#edf5f1;color:var(--green);padding:3px 7px;font-size:9px}.tag.wait{background:#f7f1e7;color:#a27a38}
+.task{display:flex;align-items:flex-start;gap:10px;padding:11px 0;border-bottom:1px solid var(--line);font-size:11px}.task input{accent-color:#476b9f;margin-top:3px}.task small{display:block;color:#9aa6b7;margin-top:3px}.progress{height:5px;background:#edf0f4;border-radius:5px;margin:12px 0}.progress i{display:block;height:100%;background:#8299b8;border-radius:5px;width:40%}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#17243a;color:white;padding:10px 16px;border-radius:8px;font-size:11px;opacity:0;transition:.2s;pointer-events:none}.toast.show{opacity:1}
+.foot{font-size:10px;color:#a1adbc;text-align:center;padding:24px 0 35px}
+@media(max-width:800px){.top{padding:0 17px}.topright{display:none}main{margin:20px auto}.heading{display:block}.case-pill{display:inline-block;margin-top:13px}.grid{grid-template-columns:1fr}.card{padding:20px}.sourceGrid{grid-template-columns:1fr}.nav button{min-width:115px}.heading h1{font-size:25px}}
+</style></head>
+<body><div class="shell">
+<header class="top"><div class="logo"><div class="mark">✳</div><div>Outbound Studio<small>AI MARKETING COPILOT</small></div></div><div class="topright"><span>工作空间 / 星瀚科技</span><span class="status">● 演示环境 · 模拟数据</span></div></header>
+<main>
+<div class="heading"><div><div class="eyebrow"><b>✳</b> INTELLIGENT OUTBOUND WORKFLOW</div><h1>让每一次出海获客，都有据可循。</h1><p>从目标定义、企业核验到营销交付与复盘，Agent 协助完成完整业务链路。</p></div><div class="case-pill">当前案例　星瀚科技 · 无线耳机 · 美国市场</div></div>
+<nav class="nav" id="nav">
+<button class="active" data-i="0"><span>01 / DISCOVER</span><strong>潜客分析</strong></button>
+<button data-i="1"><span>02 / CONNECT</span><strong>客户联系</strong></button>
+<button data-i="2"><span>03 / PROPOSE</span><strong>方案撰写</strong></button>
+<button data-i="3"><span>04 / DELIVER</span><strong>执行交付</strong></button>
+<button data-i="4"><span>05 / OPTIMIZE</span><strong>数据复盘</strong></button>
+</nav>
+<div id="workspace"></div>
+<div class="foot">OUTBOUND STUDIO · AI 辅助决策，人类负责核验与审批 · 所有企业与营销数据均为虚构演示数据</div>
+</main></div><div class="toast" id="toast"></div>
+<script>
+const traceNames=[
+["搜索潜在客户","提取公司信息","核验公开来源","判断目标客户匹配","准备开发邮件 Draft"],
+["读取客户画像","提取业务切入点","生成个性化邮件","制定跟进节奏","等待人工审核"],
+["整理客户需求","匹配服务能力","生成营销策略","拆解交付范围","生成方案 Draft"],
+["读取已确认方案","创建执行任务","生成内容资产","质量检查与审核","等待交付确认"],
+["汇总投放指标","计算关键指标","分析内容表现","识别问题与机会","生成下一轮建议"]
+];
+let stage=0,run=0,traceState="idle";
+const $=s=>document.querySelector(s);
+function toast(t){let e=$("#toast");e.textContent=t;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),2200)}
+function traceHTML(){return `<section class="card"><div class="cardhead"><div class="section"><b>02</b> RUN TRACE</div><span class="badge ${traceState==='done'?'done':''}">${traceState==='done'?'✓ 已完成':traceState==='running'?'● 执行中':'● 待启动'}</span></div><div class="meta"><div><label>RUN ID</label><b>${run?'RUN-2026-'+String(run).padStart(3,'0'):'—'}</b></div><div><label>状态</label><b>${traceState==='done'?'Success':traceState==='running'?'Running':'Idle'}</b></div></div><ol class="trace">${traceNames[stage].map((n,i)=>`<li class="${traceState==='done'?'finished':traceState==='running'&&i===0?'current':''}"><span class="num">${traceState==='done'?'✓':String(i+1).padStart(2,'0')}</span><div><strong>${n}</strong><small>${traceState==='done'?'已完成 · 模拟执行':traceState==='running'&&i===0?'正在处理当前任务':'等待执行阶段'}</small></div></li>`).join('')}</ol><div class="empty">${traceState==='done'?'本次 Run 已生成结果，可查看左侧业务产物。':'提交左侧任务后，这里展示 Agent 执行步骤与状态。'}</div></section>`}
+function runNow(){run++;traceState='done';render();toast('模拟 Run 执行完成，结果已更新')}
+function panel(title,desc,body,button='运行 Agent'){return `<div class="grid"><section class="card"><div class="cardhead"><div class="section"><b>01</b> TARGET BRIEF</div><span class="hint">任务输入</span></div><h2>${title}</h2><p class="lead">${desc}</p>${body}<div class="btnline"><button class="btn" onclick="runNow()">${button}　↗</button><span class="micro">执行结果为本地模拟，不会联系真实客户</span></div></section>${traceHTML()}</div>`}
+function render(){
+document.querySelectorAll('#nav button').forEach((b,i)=>b.classList.toggle('active',i===stage));
+let w='';
+if(stage===0){
+w=panel('告诉 Agent 你要找什么。','任务会保存市场、地区、产品和客户条件；不会在没有来源时生成客户。',`
+<div class="fields"><div class="field"><label>目标市场</label><input value="North America"></div><div class="field"><label>地区 / 国家</label><input value="United States"></div>
+<div class="field full"><label>产品条件</label><textarea>Premium wireless earbuds with long battery life</textarea></div><div class="field full"><label>目标客户条件</label><textarea>Consumer electronics brands, importers and distributors planning overseas growth</textarea></div><div class="field"><label>期望 LEAD 数</label><input value="10" type="number"></div><div class="field"><label>优先行业</label><select><option>消费电子</option><option>家居用品</option><option>户外运动</option></select></div></div>`);
+w+=`<section class="card wide"><div class="cardhead"><div class="section"><b>03</b> SOURCE CHECK</div><span class="hint">最多 50 个 / 批</span></div><h2>先确认来源，再相信结论。</h2><p class="lead">粘贴公开公司网页、联系页或行业目录，一行一个。系统会记录来源状态、规范 URL、时间和错误。</p><div class="sourceGrid"><div><div class="field"><label>来源 URL</label><textarea id="urls">https://www.example.com
+https://example.org</textarea></div><div class="btnline"><span class="micro">2 个待检验来源</span><button class="btn light" onclick="checkSources()">批量核验来源　→</button></div></div><div class="sourcebox center" id="sourceResult"><div>◎<br><br><b style="color:#60718a;font:18px Georgia">等待来源</b><p style="font-size:10px">核验结果会显示在这里，并可回到 Lead 证据链。</p></div></div></div></section>`;
+}else if(stage===1){
+w=panel('先建立联系，再推动对话。','根据已筛选的星瀚科技客户画像，生成一封有具体业务切入点的首轮邮件。',`
+<div class="field"><label>客户与联系人</label><input value="星瀚科技 · 海外市场负责人（待确认姓名）"></div><div class="field"><label>邮件主题</label><input id="subject" value="关于贵司无线耳机拓展美国市场的几个建议"></div><div class="field"><label>邮件正文 Draft</label><textarea id="email" style="min-height:190px">您好，星瀚科技团队：
+
+了解到贵司正在探索美国市场。无线耳机品类的消费者通常会关注续航、佩戴舒适度与真实使用体验。
+
+我们建议先从竞品内容观察和小规模社媒内容测试切入，验证哪些卖点更能吸引目标受众，再决定后续投放方向。
+
+如果方便，希望约 20 分钟了解贵司当前的市场目标、推广节奏与团队分工，再判断是否有合作空间。
+
+祝好！
+出海营销顾问</textarea></div><div class="field"><label>跟进节奏</label><div class="output">Day 0 · 发送首封邮件（人工审核后）<br>Day 3 · 补充一条竞品内容观察<br>Day 7 · 分享相关市场洞察并询问沟通意向<br>Day 14 · 无回复则转入低频培育</div></div>`, '生成联系草稿');
+w+=`<section class="card wide"><div class="cardhead"><div class="section"><b>03</b> HUMAN REVIEW</div><span class="badge">待审核</span></div><p class="lead">对外发送前由销售确认联系人、事实和语气。Demo 仅支持复制草稿，不会真实发送。</p><button class="btn light" onclick="copyEmail()">复制邮件草稿　↗</button></section>`;
+}else if(stage===2){
+w=panel('把客户需求变成可验收的服务方案。','方案围绕美国市场首轮验证设计，先验证内容与受众，再决定是否扩大投放。',`
+<div class="field"><label>客户需求摘要</label><textarea>星瀚科技希望拓展美国市场，目前海外品牌知名度较低，缺少社媒运营经验和成熟广告策略。预算、目标人群与历史投放数据待访谈确认。</textarea></div><div class="field"><label>服务目标</label><input value="4 周内验证目标受众与高潜内容方向"></div><div class="field"><label>服务方案 Draft</label><div class="output" id="proposal"><b>星瀚科技｜美国市场首轮营销验证</b><br><br>01 市场研究：分析 5 个竞品账号、内容卖点与互动表现。<br>02 内容策划：输出 3 个主题、6 条短视频脚本。<br>03 内容测试：适配 3 条素材，制定小额测试投放建议。<br>04 数据复盘：分析曝光、点击、互动及落地页转化。<br><br><b>交付物：</b>竞品分析表、内容策略、6 条脚本、测试复盘报告。<br><b>客户配合：</b>产品资料、品牌素材、独立站链接、历史数据、预算范围。<br><b>验收：</b>交付物完整、数据口径明确、建议有依据；不承诺投放结果。</div></div>`);
+w+=`<section class="card wide"><div class="cardhead"><div class="section"><b>03</b> SCOPE & ACCEPTANCE</div><span class="badge wait">待客户确认</span></div><div class="two"><div class="metric"><b>4 周</b><span>建议服务周期</span></div><div class="metric"><b>4 项</b><span>核心交付物类型</span></div></div><p class="lead" style="margin:14px 0 0">预算与 KPI 需在需求访谈后共同确认，不以虚构报价或未经验证的效果承诺成交。</p><div class="btnline"><button class="btn light" onclick="copyProposal()">复制方案内容　↗</button><button class="btn" onclick="stage=3;traceState='idle';render()">确认方案并拆解任务 →</button></div></section>`;
+}else if(stage===3){
+w=panel('让方案进入可追踪的执行状态。','Agent 根据已确认的服务范围拆解任务，并为每项任务定义负责人、时间和交付物。',`
+<div class="field"><label>执行项目</label><input value="星瀚科技 · 美国市场首轮营销验证"></div><div class="field"><label>任务列表</label><div class="task"><input type="checkbox" checked><div>竞品账号初筛<small>市场研究 · 已完成 · 竞品观察表</small></div></div><div class="task"><input type="checkbox" checked><div>目标人群与卖点梳理<small>策略顾问 · 已完成 · 受众假设</small></div></div><div class="task"><input type="checkbox"><div>短视频脚本撰写（6 条）<small>内容策划 · 进行中 · 第 2 周</small></div></div><div class="task"><input type="checkbox"><div>素材制作与审核<small>创意团队 · 待开始 · 第 3 周</small></div></div><div class="task"><input type="checkbox"><div>测试数据整理与复盘<small>投放分析 · 待开始 · 第 4 周</small></div></div></div><div class="progress"><i></i></div><div class="micro">演示进度：2 / 5 项完成 · 40%</div>`);
+w+=`<section class="card wide"><div class="cardhead"><div class="section"><b>03</b> DELIVERY SAMPLE</div><span class="badge done">样例已生成</span></div><h2>交付样例 · 短视频脚本 #01</h2><div class="output"><b>主题：</b>通勤场景下的无线耳机续航体验<br><b>Hook：</b>“Your commute is long. Your earbuds should keep up.”<br><br>镜头 1：早高峰通勤，展示佩戴场景。<br>镜头 2：展示续航参数（需客户确认真实规格）。<br>镜头 3：展示收纳盒与充电场景。<br><b>CTA：</b>Explore the features / Learn more.<br><br><span style="color:#a27a38">审核提醒：产品参数、认证及功效表述须经客户核实后发布。</span></div></section>`;
+}else{
+w=panel('复盘不是总结，而是决定下一轮怎么做。','以下为模拟首轮投放数据。当前没有订单与落地页事件数据，因此不推断真实获客成本。',`
+<div class="two"><div class="metric"><b>48,000</b><span>曝光量</span></div><div class="metric"><b>1,440</b><span>点击量</span></div><div class="metric"><b>3.0%</b><span>整体 CTR</span></div><div class="metric"><b>—</b><span>CPA（缺少转化数据）</span></div></div><div style="height:15px"></div><table class="table"><thead><tr><th>内容方向</th><th>曝光</th><th>点击</th><th>CTR</th></tr></thead><tbody><tr><td>通勤续航</td><td>18,000</td><td>720</td><td><b>4.0%</b></td></tr><tr><td>音质体验</td><td>16,000</td><td>400</td><td>2.5%</td></tr><tr><td>外观设计</td><td>14,000</td><td>320</td><td>2.3%</td></tr></tbody></table><div class="field" style="margin-top:16px"><label>AI 复盘结论</label><div class="output">通勤续航方向 CTR 最高（4.0%），比其他主题更能吸引点击。建议保留该方向并继续验证；音质与外观方向需要调整开场表达。当前缺少落地页访问、加购与购买事件，无法判断销售贡献。</div></div>`);
+w+=`<section class="card wide"><div class="cardhead"><div class="section"><b>03</b> NEXT EXPERIMENT</div><span class="badge">建议方案</span></div><h2>下一轮优化建议</h2><div class="output">01 · 将 60% 内容资源投入通勤续航主题，20% 音质、20% 外观作为对照。<br>02 · 针对通勤人群制作 2 个不同开场 Hook，进行 A/B 测试。<br>03 · 补充落地页访问、加购、购买事件埋点。<br>04 · 联合观察 CTR、落地页转化率与 CPA，不以曝光量单独判断。<br>05 · 达到预设样本量后，再决定是否扩大预算。</div><div class="btnline"><button class="btn" onclick="toast('已生成下一轮实验建议（模拟）')">生成下一轮实验　↗</button></div></section>`;
+}
+$("#workspace").innerHTML=w;
+}
+function checkSources(){let urls=$("#urls").value.split(/\n/).map(x=>x.trim()).filter(Boolean);$("#sourceResult").className="sourcebox";$("#sourceResult").innerHTML=`<div style="width:100%;text-align:left"><b style="font:16px Georgia">来源核验结果</b><div class="sourceRows">${urls.map(u=>`<div><span>${u}</span><span class="ok">待人工核实</span></div>`).join('')}</div><p class="micro">演示说明：未访问这些网址；状态不会伪装成真实核验成功。</p></div>`;toast('已生成来源待核验清单')}
+function copyEmail(){let t='主题：'+($("#subject")?.value||'')+'\n\n'+($("#email")?.value||'');navigator.clipboard?.writeText(t);toast('邮件草稿已复制（如剪贴板受限请手动复制）')}
+function copyProposal(){let t=$("#proposal")?.innerText||'';navigator.clipboard?.writeText(t);toast('方案内容已复制')}
+document.querySelectorAll('#nav button').forEach(b=>b.addEventListener('click',()=>{stage=+b.dataset.i;traceState='idle';render()}));
+render();
+</script></body></html>
